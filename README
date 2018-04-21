@@ -1,0 +1,76 @@
+# Racket-DATABASE
+
+  A simple implementation in Racket of a "mini" database. The defined database
+db was used for testing the functionality. The following operations were
+implemented:
+
+  -> init-database = initiates a blank database;
+  -> create-table = receives as arguments the name of the table and the names of 
+                    the columns that define it and returns a table without entries
+                    with this information;
+  -> get-name = receives a table as argument and returns its name;
+  -> get-columns = receives a table as argument and returns its column names;
+  -> get-tables = receives as a parameter a database and returns a list of tables in
+                  that database;
+  -> get-table = receives a database and a table name as arguments, and returns the
+                 database table to the specified name;
+  -> add-table = receives arguments as a database and a table it inserts into that
+                 database, returning the result (a database);
+  -> remove-table = receives a database and the name of the table it will delete
+                    from the database, returning the result (a database).
+  -> insert = inserts and entry in the database
+  (insert db table-name record) where :
+     * db = database
+     * table-name = the name of the table where we are going to insert the information;
+     * record = a list of pairs that will contain the information corresponding to the
+                line to be inserted into the table. The first element of the pair is the
+                column name, and the second value of the column.
+  -> simple-select = this operation is used to retrieve information from all the records
+                     of a table for certain columns.
+  (simple-select db table-name columns) where:
+     * db = database;
+     * table-name = the name of the table where we are going to extract the information;
+     * columns = a list containing the names of the columns for which the information
+                 in the table is to be extracted;
+  
+  The result of this operation is a list containing the values extracted for each column
+indicated. For each column the results are retained in a list. In conclusion, the result
+is a list containing n lists, where n represents the number of columns in the columns list.
+  
+  -> select = This operation has the same effect as simple-select, but allows adding
+            conditions, and will only extract records from the table that meet all the
+            specified conditions. The selected operation will have the following syntax:
+  (select db table-name columns conditions) where:
+      * columns = is a list that may contain a column name or a pair of an operation
+                  and a column name;
+      * conditions = is a list that will contain the conditions that the selected records
+                     have to meet.
+  Possible operations that may appear in the columns list are as follows:
+      min - will keep the minimum element as the value in the column;
+      max - will keep the maximum element as the value in that column;
+      count - will determine the number of values in the column;
+      sum - will determine the sum of the elements in that column;
+      avg - will determine the arithmetic mean of the items in that column;
+      sort-asc - sort the items in that column incrementally;
+      sort-desc will sort down the items in that column.
+  
+  -> update = Changing one or more records in a table is done using the update statement whose
+             general shape is the following:
+  (update db table-name values conditions)where:
+     db = database where the table to be changed is found;
+     table-name = the table name where the records will be changed;
+     values = a list of pairs (Column / value name), containing the values to be written in the
+              columns indicated for the records that meet the conditions;
+     conditions = a list of conditions that a record must meet to be editable. The terms have
+                the same form and significance as the selected operation.
+                
+   -> delete = Deleting one or more lines in a table will be done using the delete operation
+              whose syntax is the following;
+   (delete db table-name conditions) where:
+      db = database where there is a table from which to delete records;
+      table-name = name of the table to be modified;
+      conditions = a list of conditions that should be met by a record in order to be deleted
+                   from the table. The terms have the same form and significance as the selected
+                   operation.
+      
+
